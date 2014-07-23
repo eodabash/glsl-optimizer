@@ -1013,6 +1013,10 @@ void ir_print_glsl_visitor::visit(ir_swizzle *ir)
 	if (ir->val->type->vector_elements == 1)
 		return;
 
+	// Swizzling scalar types is not allowed so just return now.
+  	if (ir->val->type->vector_elements == 1)
+		return;
+
    buffer.asprintf_append (".");
    for (unsigned i = 0; i < ir->mask.num_components; i++) {
 		buffer.asprintf_append ("%c", "xyzw"[swiz[i]]);
