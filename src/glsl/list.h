@@ -75,6 +75,8 @@
 
 #include "util/ralloc.h"
 
+#pragma pack(1)
+
 struct exec_node {
    struct exec_node *next;
    struct exec_node *prev;
@@ -696,5 +698,7 @@ inline void exec_node::insert_before(exec_list *before)
         (__node)->__field.prev != NULL;                                    \
         __node = __prev, __prev =                                          \
            exec_node_data(__type, (__prev)->__field.prev, __field))
+
+#pragma pack()
 
 #endif /* LIST_CONTAINER_H */
