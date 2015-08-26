@@ -21,6 +21,7 @@ static int printhelp(const char* msg)
 	printf("\t-1 : target OpenGL (default)\n");
 	printf("\t-2 : target OpenGL ES 2.0\n");
 	printf("\t-3 : target OpenGL ES 3.0\n");
+  printf("\t-4 : target OpenGL ES 3.1\n");
 	printf("\n\tIf no output specified, output is to [input].out.\n");
 	return 1;
 }
@@ -129,6 +130,8 @@ int main(int argc, char* argv[])
 				languageTarget = kGlslTargetOpenGLES20;
 			else if( 0 == strcmp("-3", argv[i]) )
 				languageTarget = kGlslTargetOpenGLES30;
+      else if( 0 == strcmp("-4", argv[i]) )
+        languageTarget = kGlslTargetOpenGLES31;
 		}
 		else
 		{
