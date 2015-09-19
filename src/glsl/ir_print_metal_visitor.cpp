@@ -1963,9 +1963,10 @@ ir_print_metal_visitor::visit(ir_typedecl_statement *ir)
 
 	for (unsigned j = 0; j < s->length; j++) {
 		buffer.asprintf_append ("  ");
-		//if (state->es_shader)
-		//	buffer.asprintf_append ("%s", get_precision_string(s->fields.structure[j].precision)); //@TODO
-		print_type(buffer, ir, s->fields.structure[j].type, false);
+		if (state->es_shader)
+            print_type_precision(buffer, s->fields.structure[j].type, s->fields.structure[j].precision, false);
+        else
+            print_type(buffer, ir, s->fields.structure[j].type, false);
 		buffer.asprintf_append (" %s", s->fields.structure[j].name);
 		print_type_post(buffer, s->fields.structure[j].type, false);
 		buffer.asprintf_append (";\n");
