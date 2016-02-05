@@ -36,6 +36,7 @@ initialize_mesa_context(struct gl_context *ctx, glslopt_target api)
 			mesaAPI = API_OPENGLES2;
 			break;
 		case kGlslTargetOpenGLES30:
+		case kGlslTargetOpenGLES31:
 			mesaAPI = API_OPENGL_CORE;
 			break;
 		case kGlslTargetMetal:
@@ -63,6 +64,9 @@ initialize_mesa_context(struct gl_context *ctx, glslopt_target api)
 	case kGlslTargetMetal:
 		ctx->Extensions.ARB_ES3_compatibility = true;
 		ctx->Extensions.EXT_shader_framebuffer_fetch = true;
+		break;
+	case kGlslTargetOpenGLES31:
+		ctx->Extensions.NV_ES3_1_compatibility = true;
 		break;
 	}
 

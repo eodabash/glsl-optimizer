@@ -40,7 +40,8 @@ enum glslopt_target {
 	kGlslTargetOpenGL = 0,
 	kGlslTargetOpenGLES20 = 1,
 	kGlslTargetOpenGLES30 = 2,
-	kGlslTargetMetal = 3,
+  kGlslTargetOpenGLES31 = 3,
+  kGlslTargetMetal = 4
 };
 
 // Type info

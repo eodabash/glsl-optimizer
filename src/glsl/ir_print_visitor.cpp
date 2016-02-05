@@ -406,6 +406,7 @@ void ir_print_visitor::visit(ir_constant *ir)
 	 if (i != 0)
 	    fprintf(f, " ");
 	 switch (ir->type->base_type) {
+
 	 case GLSL_TYPE_UINT:  fprintf(f, "%u", ir->value.u[i]); break;
 	 case GLSL_TYPE_INT:   fprintf(f, "%d", ir->value.i[i]); break;
 	 case GLSL_TYPE_FLOAT:

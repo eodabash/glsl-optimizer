@@ -50,10 +50,7 @@ _mesa_shader_debug(struct gl_context *, GLenum, GLuint *id,
 }
 
 extern "C" void
-_mesa_error_no_memory(const char *caller)
-{
-}
-
+_mesa_error_no_memory(const char *caller);
 
 struct gl_shader *
 _mesa_new_shader(struct gl_context *ctx, GLuint name, GLenum type)
@@ -115,6 +112,7 @@ void initialize_context_to_defaults(struct gl_context *ctx, gl_api api)
    ctx->Extensions.EXT_draw_buffers = true;
 
    ctx->Extensions.NV_texture_rectangle = true;
+   ctx->Extensions.NV_ES3_1_compatibility = true;
 
    ctx->Const.AllowGLSLExtensionDirectiveMidShader = true; // makes it easier to run tests
 
