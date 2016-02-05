@@ -4789,7 +4789,8 @@ yyreduce:
       }
 
       if ((state->ARB_shading_language_420pack_enable ||
-           state->ARB_shader_atomic_counters_enable) &&
+           state->ARB_shader_atomic_counters_enable || 
+		   state->ARB_compute_shader_enable) &&
           match_layout_qualifier("binding", (yyvsp[(1) - (3)].identifier), state) == 0) {
          (yyval.type_qualifier).flags.q.explicit_binding = 1;
          (yyval.type_qualifier).binding = (yyvsp[(3) - (3)].n);

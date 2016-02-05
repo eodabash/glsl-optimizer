@@ -1,0 +1,42 @@
+#version 310 es
+
+shared vec4 sharedData[256];
+
+layout(binding = 0) uniform sampler2D inTexture;
+layout(r32f, binding = 1) uniform writeonly image2D outTexture;
+
+layout (local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+
+void main()
+{	
+	ivec2 loc = 2 * ivec2(gl_GlobalInvocationID.xy);
+
+	vec4 s;
+	s.x = texelFetch(inTexture, loc + ivec2(0, 0), 0).x;
+	s.y = texelFetch(inTexture, loc + ivec2(1, 0), 0).x;
+	s.z = texelFetch(inTexture, loc + ivec2(0, 1), 0).x;
+	s.w = texelFetch(inTexture, loc + ivec2(1, 1), 0).x;
+	
+	sharedData[gl_LocalInvocationIndex] = s;
+
+	barrier();	
+	memoryBarrierShared();
+
+	for(uint s = 256 / 2; s > 0; s >>= 1)
+	{
+		if(gl_LocalInvocationIndex < s)
+		{
+			sharedData[gl_LocalInvocationIndex] += sharedData[gl_LocalInvocationIndex + s];			
+		}
+		
+		barrier();
+		memoryBarrierShared();		
+	}	
+
+	if (gl_LocalInvocationIndex == 0)
+	{
+		float result = dot(sharedData[0], vec4(0.25, 0.25, 0.25, 0.25)) / 256;
+		imageStore(outTexture, ivec2(gl_WorkGroupID.xy), vec4(result, 0, 0, 0));
+	}
+}

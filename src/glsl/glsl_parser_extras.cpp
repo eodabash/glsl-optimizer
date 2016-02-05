@@ -174,6 +174,8 @@ _mesa_glsl_parse_state::_mesa_glsl_parse_state(struct gl_context *_ctx,
    if (_mesa_is_gles3(ctx) || ctx->Extensions.NV_ES3_1_compatibility) {
       this->supported_versions[this->num_supported_versions].ver = 310;
       this->supported_versions[this->num_supported_versions].es = true;
+	  this->ARB_compute_shader_enable = true;
+	  this->ARB_shader_image_load_store_enable = true;
       this->num_supported_versions++;
    }
    assert(this->num_supported_versions
